@@ -11,7 +11,7 @@
      
      NSDictionary *defaultDict = @{@"enabled":@(YES), @"sliderValue":@(0.5), @"unlockText":@"I like slide to unlock"};
      
-     prefsManager = [PHPrefsManager managerWithId:tweakId defaultValues:defaultDict notification:prefsNotification notificationCallback:^void (PHPrefsManager *manager) {
+     prefsManager = [[PHPrefsManager alloc] initWithId:tweakId defaultValues:defaultDict notification:prefsNotification notificationCallback:^void (PHPrefsManager *manager) {
       // do something after Preferences are reloaded
 
      }];
@@ -19,7 +19,7 @@
 ## Init Options for PHPrefsManager
 The method below is the proper way to initialize  `PHPrefsManager`
 
-    + (id)managerWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB;
+    - (id)initWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB
     
 ### args
 `arg1` = **bundle identifier**  `(NSString)`
@@ -94,5 +94,5 @@ The way this works is you override setPreferenceValue:specifier and readPreferen
 - Build the Xcode project and it will give you a static library named `libPreferencesHelper.a`.
 - Copy it to the same folder as your Makefile and add this line to your Makefile:
    `mytweak_LDFLAGS = -L. -lPreferencesHelper` to link it.
-- You will also have to include the header file `PHPrefsManager.h` in your code.
+- You will also have to include the header file `PreferencesHelper.h` in your code.
 - Also note you will most likely need to link your PreferenceBundle to `libPreferencesHelper.a` by adding the same lines to your Makefile.

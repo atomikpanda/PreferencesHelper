@@ -3,7 +3,7 @@
 
 @interface PHPrefsManager : NSObject
 //                          required                           required                               optional                                 optional
-+ (id)managerWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB;
+- (id)initWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB;
 
 // Methods to get values:
 - (id)objectForKey:(NSString *)key;
@@ -18,7 +18,7 @@
 - (void)saveAndNotify;
 - (void)notifyEveryone;
 // Default values are used as a fallback when a specific key doesn't exist
-@property (nonatomic, retain) NSDictionary *defaultValues;
+@property (nonatomic, copy) NSDictionary *defaultValues;
 
 // PreferencesBundle methods similar to Karen (angelXwind)'s method
 /*

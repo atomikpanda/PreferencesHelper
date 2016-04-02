@@ -6,10 +6,17 @@
 
 @interface PHPrefsManager ()
 @property (assign) void (^notificationCallback)(PHPrefsManager *);
-@property (nonatomic, retain) NSString *notificationName;
-@property (nonatomic, retain) NSString *identifer;
+@property (nonatomic, copy) NSString *notificationName;
+@property (nonatomic, copy) NSString *identifer;
 @property (nonatomic, retain) NSMutableDictionary *currentPrefsImplementation;
+- (void)notificationReceived;
 @end
+
+static void got_notification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo )
+{
+    if (observer)
+        [(PHPrefsManager *)observer notificationReceived];
+}
 
 @implementation PHPrefsManager
 @synthesize notificationCallback, defaultValues, notificationName, identifer, currentPrefsImplementation;
@@ -29,32 +36,32 @@
   self.currentPrefsImplementation = prefs;
 }
 
-+ (id)managerWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB
+- (id)initWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB
 {
- PHPrefsManager *manager = [[PHPrefsManager alloc] init];
+ self = [self init];
 
- manager.identifer = ident;
- manager.defaultValues = defaultDict;
-
+ self.identifer = ident;
+ self.defaultValues = defaultDict;
+    
  if (notif)
  {
-  manager.notificationName = notif;
-  manager.notificationCallback = notifCB;
-  CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)^void (void) {
-    [manager notificationReceived];
-  },
+  self.notificationName = notif;
+  self.notificationCallback = notifCB;
+  CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), self, (CFNotificationCallback)got_notification,
   (CFStringRef)notif, NULL, CFNotificationSuspensionBehaviorCoalesce);
  }
 
- [manager updateCurrentImplementation];
+ [self updateCurrentImplementation];
 
- return [manager autorelease];
+ return  self;
 }
 
 - (void)notificationReceived
 {
   [self updateCurrentImplementation];
-  self.notificationCallback(self);
+    
+  if (self.notificationCallback)
+   self.notificationCallback(self);
 }
 
 - (id)objectForKey:(NSString *)key
@@ -114,12 +121,14 @@
 
 - (id)readPreferenceValue:(PSSpecifier *)specifier
 {
-    return ([self objectForKey:specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+    return ([self objectForKey:[specifier.properties objectForKey:@"key"]]) ?: [specifier.properties objectForKey:@"default"];
 }
 
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier
 {
-    [self setObject:value forKey:specifier.properties[@"key"]];
+    
+    if (!specifier) return;
+    [self setObject:value forKey:[specifier.properties objectForKey:@"key"]];
     [self saveAndNotify];
 }
 
