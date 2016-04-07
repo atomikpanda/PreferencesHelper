@@ -19,6 +19,8 @@
 - (void)notifyEveryone;
 // Default values are used as a fallback when a specific key doesn't exist
 @property (nonatomic, copy) NSDictionary *defaultValues;
+// If you do not store your plist at /var/mobile/Library/Preferences override this to set full path
+@property (nonatomic, retain) NSString *plistPath;
 
 // PreferencesBundle methods similar to Karen (angelXwind)'s method
 /*

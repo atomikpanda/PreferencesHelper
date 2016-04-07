@@ -7,7 +7,6 @@
 @interface PHPrefsManager ()
 @property (assign) void (^notificationCallback)(PHPrefsManager *);
 @property (nonatomic, copy) NSString *notificationName;
-@property (nonatomic, copy) NSString *identifer;
 @property (nonatomic, retain) NSMutableDictionary *currentPrefsImplementation;
 - (void)notificationReceived;
 @end
@@ -19,12 +18,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 }
 
 @implementation PHPrefsManager
-@synthesize notificationCallback, defaultValues, notificationName, identifer, currentPrefsImplementation;
-
-- (NSString *)plistPath
-{
-  return [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", self.identifer];
-}
+@synthesize notificationCallback, defaultValues, notificationName, currentPrefsImplementation, plistPath=_plistPath;
 
 - (void)updateCurrentImplementation
 {
@@ -36,11 +30,22 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
   self.currentPrefsImplementation = prefs;
 }
 
+- (NSString *)identifier
+{
+    return [[self.plistPath lastPathComponent] stringByDeletingPathExtension];
+}
+
+- (void)setPlistPath:(NSString *)plistPath
+{
+    _plistPath = plistPath;
+    [self updateCurrentImplementation];
+}
+
 - (id)initWithId:(NSString *)ident defaultValues:(NSDictionary *)defaultDict notification:(NSString *)notif notificationCallback:(void (^)(PHPrefsManager *))notifCB
 {
  self = [self init];
 
- self.identifer = ident;
+    self.plistPath = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", ident];
  self.defaultValues = defaultDict;
     
  if (notif)
@@ -136,7 +141,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 {
  self.defaultValues = nil;
  self.notificationName = nil;
- self.identifer = nil;
+ self.plistPath = nil;
  self.currentPrefsImplementation = nil;
 
  [super dealloc];

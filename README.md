@@ -41,6 +41,11 @@ The method below is the proper way to initialize  `PHPrefsManager`
 *Notification callback is optional as Preferences Helper already updates itself (no need to reload any dictionary)*
 
 ---
+## Using a plist not at /var/mobile/Library/Preferences
+set the `plistPath` property on your manager like this:
+`prefsManager.plistPath = @"/path/to/your.plist";`
+
+---
 
 ## Retrieving Preference Values
 The methods below are pretty straightforward.
