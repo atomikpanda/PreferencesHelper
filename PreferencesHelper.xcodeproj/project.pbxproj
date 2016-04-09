@@ -7,25 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA8A2B761CAF17C800FE2A6F /* PreferencesHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA8A2B751CAF17C800FE2A6F /* PreferencesHelper.mm */; };
+		CA9DDD041CB8AACA00A9DBE8 /* PreferencesHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA9DDD031CB8AACA00A9DBE8 /* PreferencesHelper.mm */; };
+		CA9DDD051CB8AADA00A9DBE8 /* PreferencesHelper.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CA9DDD021CB8AACA00A9DBE8 /* PreferencesHelper.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CA8A2B661CAF177F00FE2A6F /* CopyFiles */ = {
+		CA8A2B661CAF177F00FE2A6F /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				CA9DDD051CB8AADA00A9DBE8 /* PreferencesHelper.h in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CA8A2B681CAF177F00FE2A6F /* libPreferencesHelper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPreferencesHelper.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA8A2B741CAF17C800FE2A6F /* PreferencesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesHelper.h; sourceTree = "<group>"; };
-		CA8A2B751CAF17C800FE2A6F /* PreferencesHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PreferencesHelper.mm; sourceTree = "<group>"; };
+		CA9DDD021CB8AACA00A9DBE8 /* PreferencesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesHelper.h; sourceTree = "<group>"; };
+		CA9DDD031CB8AACA00A9DBE8 /* PreferencesHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PreferencesHelper.mm; sourceTree = "<group>"; };
+		CA9DDD061CB8AAF600A9DBE8 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +46,9 @@
 		CA8A2B5F1CAF177F00FE2A6F = {
 			isa = PBXGroup;
 			children = (
-				CA8A2B6A1CAF177F00FE2A6F /* PreferencesHelper */,
+				CA9DDD021CB8AACA00A9DBE8 /* PreferencesHelper.h */,
+				CA9DDD031CB8AACA00A9DBE8 /* PreferencesHelper.mm */,
+				CA9DDD061CB8AAF600A9DBE8 /* build.sh */,
 				CA8A2B691CAF177F00FE2A6F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,15 +61,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CA8A2B6A1CAF177F00FE2A6F /* PreferencesHelper */ = {
-			isa = PBXGroup;
-			children = (
-				CA8A2B741CAF17C800FE2A6F /* PreferencesHelper.h */,
-				CA8A2B751CAF17C800FE2A6F /* PreferencesHelper.mm */,
-			);
-			path = PreferencesHelper;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -73,7 +70,7 @@
 			buildPhases = (
 				CA8A2B641CAF177F00FE2A6F /* Sources */,
 				CA8A2B651CAF177F00FE2A6F /* Frameworks */,
-				CA8A2B661CAF177F00FE2A6F /* CopyFiles */,
+				CA8A2B661CAF177F00FE2A6F /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -120,7 +117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA8A2B761CAF17C800FE2A6F /* PreferencesHelper.mm in Sources */,
+				CA9DDD041CB8AACA00A9DBE8 /* PreferencesHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +253,7 @@
 				CA8A2B731CAF177F00FE2A6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
