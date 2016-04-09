@@ -1,1 +1,1 @@
-xcodebuild -configuration 'Release' CONFIGURATION_BUILD_DIR='PreferencesHelper'
+xcodebuild -configuration 'Release' CONFIGURATION_BUILD_DIR='release'
