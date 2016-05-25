@@ -37,7 +37,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 
 - (void)setPlistPath:(NSString *)plistPath
 {
-    _plistPath = plistPath;
+    _plistPath = [plistPath retain];
     [self updateCurrentImplementation];
 }
 
