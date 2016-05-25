@@ -45,7 +45,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 {
  self = [self init];
 
-    _plistPath = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", ident];
+    _plistPath = [[NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", ident] retain];
  self.defaultValues = defaultDict;
     
  if (notif)
