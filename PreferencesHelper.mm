@@ -47,7 +47,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 
     _plistPath = [[NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", ident] retain];
  self.defaultValues = defaultDict;
-    
+
  if (notif)
  {
   self.notificationName = notif;
@@ -64,7 +64,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 - (void)notificationReceived
 {
   [self updateCurrentImplementation];
-    
+
   if (self.notificationCallback)
    self.notificationCallback(self);
 }
@@ -109,7 +109,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 
 - (void)save
 {
- [self.currentPrefsImplementation writeToFile:[self plistPath] atomically:YES];
+ [self.currentPrefsImplementation writeToFile:[self plistPath] atomically:NO];
 }
 
 - (void)notifyEveryone
@@ -131,7 +131,7 @@ static void got_notification(CFNotificationCenterRef center, void *observer, CFS
 
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier
 {
-    
+
     if (!specifier) return;
     [self setObject:value forKey:[specifier.properties objectForKey:@"key"]];
     [self saveAndNotify];
